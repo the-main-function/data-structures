@@ -37,6 +37,31 @@ class SinglyLinkedList <T> {
 		show();
 	}
 
+	//recursive code to find length of linked list 
+	public int getLengthRecursive(Node node){	// will take head of the linked list as arguement
+		if(node==null){
+			return 0;
+		}
+		else{
+			return 1 + getLengthRecursive(node.next);
+		}
+	}
+
+	//iterative loop to find lenght of linked list
+	public int getLengthIterative(Node node){
+		int listLength = 0;
+		while(true){
+			if(node == null){
+				break;
+			}
+			else{
+				listLength++;
+				node = node.next;
+			}
+		}
+		return listLength;
+	}
+
 	//displays the elements of the linked list
 	public void show(){
 		System.out.println();
@@ -51,6 +76,10 @@ class SinglyLinkedList <T> {
 			}
 		}
 		System.out.println("\n");
+	}
+
+	public int getLength(){
+		return length;
 	}
 
 }
