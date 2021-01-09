@@ -48,7 +48,7 @@ class SinglyLinkedList <T> {
 	}
 
 	//iterative loop to find lenght of linked list
-	public int getLengthIterative(Node node){
+	public int getLengthIterative(Node node){	//will take head of the linked list as arguement
 		int listLength = 0;
 		while(true){
 			if(node == null){
