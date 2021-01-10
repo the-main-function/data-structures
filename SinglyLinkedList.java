@@ -95,18 +95,43 @@ class SinglyLinkedList <T> {
 		addElemToEnd(data); //addElem() and addElemToEnd() both add node at the end
 	}
 
+	//inserting node after a particular elements ..first come first serve (in case of duplicate elements)
+	public void addELementAfter(T after_data , T data){
+		Node newNode = new Node(data);
+		//traverse till node after which new node is to be added
+		Node trav =  head;
+		while(trav.next != null){
+			if(trav.data.equals(after_data)){
+				break;
+			}
+			else{
+				trav = trav.next;
+			}
+		}
+
+		if(trav.next == null){
+			addElem(data); //addElemAtEnd(data) can also be used;
+		}
+		else{
+			newNode.next = trav.next;
+			trav.next = newNode;
+		}
+		show();
+	}
+
 	public int getLength(){
 		return length;
 	}
 
 	public static void main(String[] args) {
-		SinglyLinkedList s = new SinglyLinkedList();
+		SinglyLinkedList<Integer> s = new SinglyLinkedList<Integer>();
 		s.addElem(12);
 		s.addElem(96);
 		s.addElem(31);
 		s.addElem(82);
 		s.addElem(19);
 		s.addElemToFront(27);
+		s.addELementAfter(82,64);
 	}
 
 }
