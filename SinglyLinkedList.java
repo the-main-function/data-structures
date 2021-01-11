@@ -48,7 +48,7 @@ class SinglyLinkedList <T> {
 	}
 
 	//iterative loop to find lenght of linked list
-	public int getLengthIterative(Node node){	//will take head of the linked list as arguement
+	public int getLengthIterative(Node node){	// will take head of the linked list as arguement
 		int listLength = 0;
 		while(true){
 			if(node == null){
@@ -78,8 +78,60 @@ class SinglyLinkedList <T> {
 		System.out.println("\n");
 	}
 
+	//adding element to the front of the linked list
+	public void addElemToFront(T data){
+		if(head==null){
+			addElem(data);
+		}
+
+		Node newNode = new Node(data);
+		newNode.next = head;
+		head = newNode;
+		show();
+	}
+	
+	//addding element to the end of the linked list 
+	public void addElemToEnd(T data){
+		addElemToEnd(data); //addElem() and addElemToEnd() both add node at the end
+	}
+
+	//inserting node after a particular elements ..first come first serve (in case of duplicate elements)
+	public void addELementAfter(T after_data , T data){
+		Node newNode = new Node(data);
+		//traverse till node after which new node is to be added
+		Node trav =  head;
+		while(trav.next != null){
+			if(trav.data.equals(after_data)){
+				break;
+			}
+			else{
+				trav = trav.next;
+			}
+		}
+
+		if(trav.next == null){
+			addElem(data); //addElemAtEnd(data) can also be used;
+		}
+		else{
+			newNode.next = trav.next;
+			trav.next = newNode;
+		}
+		show();
+	}
+
 	public int getLength(){
 		return length;
+	}
+
+	public static void main(String[] args) {
+		SinglyLinkedList<Integer> s = new SinglyLinkedList<Integer>();
+		s.addElem(12);
+		s.addElem(96);
+		s.addElem(31);
+		s.addElem(82);
+		s.addElem(19);
+		s.addElemToFront(27);
+		s.addELementAfter(82,64);
 	}
 
 }
