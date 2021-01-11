@@ -22,21 +22,7 @@ class SinglyLinkedList <T> {
 		}
 	}
 
-	// adds element at the end of the list
-	public void addElem(T data){  
-		Node newNode = new Node(data);
-		if(isEmpty()){
-			head = newNode;
-			tail = newNode;
-		}
-		else{
-			tail.next = newNode;
-			tail = newNode;
-		}
-		length++;
-		show();
-	}
-
+	
 	//recursive code to find length of linked list 
 	public int getLengthRecursive(Node node){	// will take head of the linked list as arguement
 		if(node==null){
@@ -78,6 +64,24 @@ class SinglyLinkedList <T> {
 		System.out.println("\n");
 	}
 
+	//-------------------------methods to add elements to the linked list-------------------//
+
+	// adds element at the end of the list
+	public void addElem(T data){  
+		Node newNode = new Node(data);
+		if(isEmpty()){
+			head = newNode;
+			tail = newNode;
+		}
+		else{
+			tail.next = newNode;
+			tail = newNode;
+		}
+		length++;
+		show();
+	}
+
+
 	//adding element to the front of the linked list
 	public void addElemToFront(T data){
 		if(head==null){
@@ -118,11 +122,68 @@ class SinglyLinkedList <T> {
 		}
 		show();
 	}
+	//--------------------------------------------------------------------------------//
 
+	//------------------------methods to delete element from a linked list------------//
+	public void deleteFirstElem(){
+		Node trav = head;
+		head = head.next;
+		trav.next = null;
+		length--;
+		show();
+	}
+
+	public void deleteLastElem(){
+		Node temp = head;
+		Node prev = null; // will point to the previous node
+		while(temp.next!=null){
+			prev = temp;
+			temp = temp.next;
+		}
+		prev.next = null;
+		tail = prev;
+		length--;
+		show();
+	}
+
+	public void deleteElemAtKey(T key){
+		Node trav = head;
+		Node prev = null;
+		//if the key is at head itself then we call deleteFirstElem()
+		if(head.data.equals(key)){
+			deleteFirstElem();
+			return;
+		}
+
+		while(trav.next != null && !trav.data.equals(key)){
+			prev = trav;
+			trav = trav.next;
+		}
+		//after the while loop the trav variable points to the key node and prev one node before the key
+		prev.next = trav.next;
+		trav.next = null; 
+
+		//if prev.next == null that means it is the last element of the linked list
+		//and hence the tail is made to point to it 
+		if(prev.next == null){
+			tail = prev;
+		}
+		length --;	
+		show();	
+	}
+	//-----------------------------------------------------------------------------//
 	public int getLength(){
 		return length;
 	}
 
+	public int getHead(){
+		return head;
+	}
+
+	public int getTail(){
+		return tail;
+	}
+	//---------------------------------------------------------------------------//
 	public static void main(String[] args) {
 		SinglyLinkedList<Integer> s = new SinglyLinkedList<Integer>();
 		s.addElem(12);
@@ -131,7 +192,11 @@ class SinglyLinkedList <T> {
 		s.addElem(82);
 		s.addElem(19);
 		s.addElemToFront(27);
+		s.deleteFirstElem();
 		s.addELementAfter(82,64);
+		s.deleteElemAtKey(31);
+		s.deleteElemAtKey(19);
+		s.deleteElemAtKey(12);
 	}
 
 }
