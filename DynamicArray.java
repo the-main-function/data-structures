@@ -4,7 +4,7 @@ class DynamicArray <T>{
 	T arr[];
 
 	public T[] createArray(int capacity){
-		//System.out.println("in createArray block");
+		//System.out.println("!!!!!!!!!!!in createArray block");
 		this.capacity = capacity;
 		T newArr[] = (T[])new Object[capacity];
 		return newArr;
